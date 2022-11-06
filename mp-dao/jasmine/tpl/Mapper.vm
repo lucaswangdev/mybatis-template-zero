@@ -1,0 +1,27 @@
+#set ($entityType = "${model.entityPkg}.${model.table.className}")
+#macro(name $rawName)
+${rawName.substring(0,1).toLowerCase()}${rawName.substring(1)}##
+#end
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${model.repoPkg}.${model.table.className}Mapper">
+    <sql id="TableName">
+        ${model.table.name}
+    </sql>
+
+    <sql id="BaseColumnList">
+#foreach($column in $model.table.columns)##
+#if($foreach.first)     #end
+`${column.name}`##
+#if($foreach.hasNext ), #end##
+#end
+
+    </sql>
+
+    <resultMap id="BaseResultMap" type="${entityType}" autoMapping="false">
+#foreach($column in $model.table.columns)
+        <result column="$column.name" property="$column.fieldName" jdbcType="$column.jdbcType"/>
+#end
+    </resultMap>
+
+</mapper>

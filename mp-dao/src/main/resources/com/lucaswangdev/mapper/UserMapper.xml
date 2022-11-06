@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lucaswangdev.mapper.UserMapper">
+    <sql id="TableName">
+        user
+    </sql>
+
+    <sql id="BaseColumnList">
+     `id`, `user_name`, `sex`, `address`
+    </sql>
+
+    <resultMap id="BaseResultMap" type="com.lucaswangdev.entity.User" autoMapping="false">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="query" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from
+        <include refid="TableName"/>
+        where
+        `id` = #{id}
+    </select>
+
+    <delete id="delete">
+        DELETE from
+        <include refid="TableName"/>
+        where
+        `id` = #{id}
+    </delete>
+
+</mapper>

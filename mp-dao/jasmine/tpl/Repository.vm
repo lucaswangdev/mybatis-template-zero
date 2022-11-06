@@ -1,0 +1,9 @@
+package $model.repoPkg;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ${model.table.className}Mapper extends ${model.table.className}MapperBase {
+
+}
+

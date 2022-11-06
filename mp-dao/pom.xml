@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>mybatis-template-zero</artifactId>
+        <groupId>com.lucaswangdev</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>mp-dao</artifactId>
+
+    <dependencies>
+        <!--mybatis start 依赖-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
+        <!-- MySQL连接驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- 给mapperXML传参 -->
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.data</groupId>-->
+        <!--    <artifactId>spring-data-commons</artifactId>-->
+        <!--    <version>2.3.5.RELEASE</version>-->
+        <!--</dependency>-->
+    </dependencies>
+</project>
