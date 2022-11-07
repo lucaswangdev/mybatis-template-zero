@@ -4,6 +4,7 @@ import com.lucaswangdev.utils.AjaxResult;
 import com.lucaswangdev.entity.User;
 import com.lucaswangdev.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Value("${server.port}")
+    private String serverPort;
+
     /**
      * @param
      * @return
@@ -21,6 +25,7 @@ public class UserController {
     @RequestMapping("/query")
     public AjaxResult findUser(@RequestBody User user) {
         try {
+            System.out.println("serverPort = " + serverPort);
             User _user = userService.selectById(user.getId());
             return AjaxResult.success(_user);
         } catch (Exception e) {

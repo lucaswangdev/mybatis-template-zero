@@ -31,3 +31,9 @@ pegehelper:
   support-methods-arguments: true
   params: count=countSql
   row-bounds-uewith-count: tr
+
+wechat:
+  # 设置微信 appid
+  appid: xxx
+  # 设置微信 secret
+  secret: xxxx
