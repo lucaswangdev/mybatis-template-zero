@@ -32,4 +32,13 @@
         `id` = #{id}
     </delete>
 
+    <!--通过地址查询用户    -->
+    <select id="queryByAddress" resultType="com.lucaswangdev.entity.User">
+        select
+        <include refid="BaseColumnList" />
+        from
+        <include refid="TableName" />
+        where `address` = #{user.address} ORDER BY `id` DESC
+    </select>
+
 </mapper>

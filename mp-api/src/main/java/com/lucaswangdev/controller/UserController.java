@@ -3,15 +3,19 @@ package com.lucaswangdev.controller;
 import com.lucaswangdev.utils.AjaxResult;
 import com.lucaswangdev.entity.User;
 import com.lucaswangdev.service.UserService;
+import com.lucaswangdev.utils.BaseController;
+import com.lucaswangdev.utils.TableDataInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
@@ -34,6 +38,23 @@ public class UserController {
         }
     }
 
+    /**
+     * @param
+     * @return
+     */
+    @RequestMapping("/queryByAddress")
+    public AjaxResult queryByAddress(@RequestBody User user) {
+        try {
+            // logger.error("getAddress===>" + user.getAddress());
+            user.setAddress(user.getAddress());
+            List<User> userList = userService.queryByAddress(user);
+            TableDataInfo tableDataInfo = getDataTable(userList);
+            return AjaxResult.success(tableDataInfo);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return AjaxResult.error(e.getMessage());
+        }
+    }
 
     @RequestMapping("/insert")
     public AjaxResult add(@RequestBody User user) {

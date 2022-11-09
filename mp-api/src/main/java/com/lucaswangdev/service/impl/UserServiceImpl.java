@@ -1,10 +1,13 @@
 package com.lucaswangdev.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.lucaswangdev.entity.User;
 import com.lucaswangdev.mapper.UserMapper;
 import com.lucaswangdev.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,5 +34,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer delete(Integer id) {
         return userMapper.delete(id);
+    }
+
+    @Override
+    public List<User> queryByAddress(User user) {
+        // 分页
+        if(user.getPageNo() != null && user.getPageSize() != null){
+            PageHelper.startPage(user.getPageNo(), user.getPageSize());
+        }
+        return userMapper.queryByAddress(user);
     }
 }
