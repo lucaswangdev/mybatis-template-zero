@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lucaswangdev.mapper.ApiMockMapperBase">
+    <sql id="TableName">
+        api_mock
+    </sql>
+
+    <sql id="BaseColumnList">
+     `id`, `api_path`, `api_content`, `delay`
+    </sql>
+
+    <resultMap id="BaseResultMap" type="com.lucaswangdev.entity.ApiMock" autoMapping="false">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="api_path" property="apiPath" jdbcType="VARCHAR"/>
+        <result column="api_content" property="apiContent" jdbcType="VARCHAR"/>
+        <result column="delay" property="delay" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="apiMock.id">
+        INSERT INTO
+        <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `id`,
+            `api_path`,
+            `api_content`,
+            `delay`,
+
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            #{apiMock.id,jdbcType=BIGINT},
+            #{apiMock.apiPath,jdbcType=VARCHAR},
+            #{apiMock.apiContent,jdbcType=VARCHAR},
+            #{apiMock.delay,jdbcType=INTEGER},
+
+        </trim>
+    </insert>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="apiMock.id">
+        INSERT INTO
+        <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="apiMock.id != null">
+                `id`,
+            </if>
+            <if test="apiMock.apiPath != null">
+                `api_path`,
+            </if>
+            <if test="apiMock.apiContent != null">
+                `api_content`,
+            </if>
+            <if test="apiMock.delay != null">
+                `delay`,
+            </if>
+
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            <if test="apiMock.id != null">
+                #{apiMock.id,jdbcType=BIGINT},
+            </if>
+            <if test="apiMock.apiPath != null">
+                #{apiMock.apiPath,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.apiContent != null">
+                #{apiMock.apiContent,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.delay != null">
+                #{apiMock.delay,jdbcType=INTEGER},
+            </if>
+
+        </trim>
+    </insert>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from
+        <include refid="TableName"/>
+        where
+            `id` = #{id}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey">
+        DELETE from
+        <include refid="TableName"/>
+        where
+            `id` = #{id}
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        update
+        <include refid="TableName"/>
+        set
+        <trim suffixOverrides=",">
+            `api_path` = #{apiMock.apiPath,jdbcType=VARCHAR},
+            `api_content` = #{apiMock.apiContent,jdbcType=VARCHAR},
+            `delay` = #{apiMock.delay,jdbcType=INTEGER},
+        </trim>
+        where
+            `id` = #{apiMock.id}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        update
+        <include refid="TableName"/>
+        set
+        <trim suffixOverrides=",">
+            <if test="apiMock.apiPath != null">
+                `api_path` = #{apiMock.apiPath,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.apiContent != null">
+                `api_content` = #{apiMock.apiContent,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.delay != null">
+                `delay` = #{apiMock.delay,jdbcType=INTEGER},
+            </if>
+        </trim>
+        where
+            `id` = #{apiMock.id}
+    </update>
+</mapper>

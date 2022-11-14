@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lucaswangdev.mapper.ApiMockMapper">
+    <sql id="TableName">
+        api_mock
+    </sql>
+
+    <sql id="BaseColumnList">
+     `id`, `api_path`, `api_content`, `delay`
+    </sql>
+
+    <resultMap id="BaseResultMap" type="com.lucaswangdev.entity.ApiMock" autoMapping="false">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="api_path" property="apiPath" jdbcType="VARCHAR"/>
+        <result column="api_content" property="apiContent" jdbcType="VARCHAR"/>
+        <result column="delay" property="delay" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryBySelective" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from
+        <include refid="TableName" />
+        where `api_path` = #{apiMock.apiPath}
+    </select>
+</mapper>
