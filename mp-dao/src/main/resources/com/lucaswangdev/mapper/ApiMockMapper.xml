@@ -16,6 +16,111 @@
         <result column="delay" property="delay" jdbcType="INTEGER"/>
     </resultMap>
 
+    <insert id="insert" useGeneratedKeys="true" keyProperty="apiMock.id">
+        INSERT INTO
+        <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            `id`,
+            `api_path`,
+            `api_content`,
+            `delay`,
+
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            #{apiMock.id,jdbcType=BIGINT},
+            #{apiMock.apiPath,jdbcType=VARCHAR},
+            #{apiMock.apiContent,jdbcType=VARCHAR},
+            #{apiMock.delay,jdbcType=INTEGER},
+
+        </trim>
+    </insert>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="apiMock.id">
+        INSERT INTO
+        <include refid="TableName"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="apiMock.id != null">
+                `id`,
+            </if>
+            <if test="apiMock.apiPath != null">
+                `api_path`,
+            </if>
+            <if test="apiMock.apiContent != null">
+                `api_content`,
+            </if>
+            <if test="apiMock.delay != null">
+                `delay`,
+            </if>
+
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+            <if test="apiMock.id != null">
+                #{apiMock.id,jdbcType=BIGINT},
+            </if>
+            <if test="apiMock.apiPath != null">
+                #{apiMock.apiPath,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.apiContent != null">
+                #{apiMock.apiContent,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.delay != null">
+                #{apiMock.delay,jdbcType=INTEGER},
+            </if>
+
+        </trim>
+    </insert>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumnList"/>
+        from
+        <include refid="TableName"/>
+        where
+            `id` = #{id}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey">
+        DELETE from
+        <include refid="TableName"/>
+        where
+            `id` = #{id}
+    </delete>
+
+    <update id="updateByPrimaryKey">
+        update
+        <include refid="TableName"/>
+        set
+        <trim suffixOverrides=",">
+            `api_path` = #{apiMock.apiPath,jdbcType=VARCHAR},
+            `api_content` = #{apiMock.apiContent,jdbcType=VARCHAR},
+            `delay` = #{apiMock.delay,jdbcType=INTEGER},
+        </trim>
+        where
+            `id` = #{apiMock.id}
+    </update>
+
+    <update id="updateByPrimaryKeySelective">
+        update
+        <include refid="TableName"/>
+        set
+        <trim suffixOverrides=",">
+            <if test="apiMock.apiPath != null">
+                `api_path` = #{apiMock.apiPath,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.apiContent != null">
+                `api_content` = #{apiMock.apiContent,jdbcType=VARCHAR},
+            </if>
+            <if test="apiMock.delay != null">
+                `delay` = #{apiMock.delay,jdbcType=INTEGER},
+            </if>
+        </trim>
+        where
+            `id` = #{apiMock.id}
+    </update>
+
+<!-- The above part of the comment is auto generated, the following part is written by the user, please do not delete this comment. -->
+
     <select id="queryBySelective" resultMap="BaseResultMap">
         select
         <include refid="BaseColumnList"/>
