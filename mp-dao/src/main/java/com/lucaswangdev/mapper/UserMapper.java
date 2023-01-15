@@ -2,7 +2,6 @@ package com.lucaswangdev.mapper;
 
 import com.lucaswangdev.entity.User;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**

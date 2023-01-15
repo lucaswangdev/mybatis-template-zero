@@ -5,6 +5,7 @@ package $model.repoPkg;
 
 import ${model.entityPkg}.${model.table.className};
 import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 /**
  * ${model.table.className}Mapper.
